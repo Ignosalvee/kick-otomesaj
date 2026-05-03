@@ -32,6 +32,10 @@ app.post('/webhook', async (req, res) => {
 
     const event = req.body;
     console.log('Gelen event:', JSON.stringify(event));
+    if (process.env.ACTIVE === 'false') {
+     console.log('Bot pasif, mesaj atılmadı.');
+     return res.status(200).send('OK');
+}
 
     // Sub eventi
     if (
