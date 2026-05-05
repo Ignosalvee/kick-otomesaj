@@ -10,9 +10,9 @@ const CHANNEL_ID = process.env.CHANNEL_ID;
 const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
 
 // Mesajlar
-const MSG_NEW      = process.env.MSG_NEW      || 'Hoşgeldin {kullanici}!';   // 1. ay
-const MSG_REGULAR  = process.env.MSG_REGULAR  || 'Tekrar hoşgeldin {kullanici}!'; // 2-5. ay
-const MSG_VETERAN  = process.env.MSG_VETERAN  || '{kullanici} {ay} ay oldu!'; // 6+ ay
+const MSG_NEW      = process.env.MSG_NEW      || 'Hoşgeldin {kullanici}!';
+const MSG_REGULAR  = process.env.MSG_REGULAR  || 'Tekrar hoşgeldin {kullanici}!';
+const MSG_VETERAN  = process.env.MSG_VETERAN  || '{kullanici} {ay} ay oldu!';
 const GIFT_MESSAGE = process.env.GIFT_MESSAGE || '{gonderen} hediye abone gönderdi, hoşgeldin {alan}!';
 
 // Sağlık kontrolü
@@ -23,16 +23,15 @@ app.get('/', (req, res) => {
 // Kick buraya POST atacak
 app.post('/webhook', async (req, res) => {
   try {
-    // Güvenlik kontrolü
-    console.log('Headers:', JSON.stringify(req.headers));;
-    }
+    console.log('Headers:', JSON.stringify(req.headers));
 
     const event = req.body;
     console.log('Gelen event:', JSON.stringify(event));
+
     if (process.env.ACTIVE === 'false') {
-     console.log('Bot pasif, mesaj atılmadı.');
-     return res.status(200).send('OK');
-}
+      console.log('Bot pasif, mesaj atılmadı.');
+      return res.status(200).send('OK');
+    }
 
     // Sub eventi
     if (
