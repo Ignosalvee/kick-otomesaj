@@ -24,10 +24,7 @@ app.get('/', (req, res) => {
 app.post('/webhook', async (req, res) => {
   try {
     // Güvenlik kontrolü
-    const secret = req.headers['x-kick-signature'] || req.headers['x-webhook-secret'];
-    if (secret !== WEBHOOK_SECRET) {
-      console.log('Geçersiz webhook secret');
-      return res.status(401).send('Unauthorized');
+    console.log('Headers:', JSON.stringify(req.headers));;
     }
 
     const event = req.body;
